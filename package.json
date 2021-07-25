@@ -1,0 +1,36 @@
+{
+  "name": "kamibot",
+  "version": "1.0.0",
+  "description": "Kami Bot 是一個功能強大且多用途的 Discord 機器人，自 2021 年以來就一直努力不懈的在 Discord 伺服器上服務。他擁有許多功能，例如：撥放音樂、爬文、成員計算、警告...... +190，讓您工作更輕鬆。",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kami-sqmf/Kami-Bot.git"
+  },
+  "keywords": [
+    "Discord",
+    "Bot",
+    "Music",
+    "Profile",
+    "Customize"
+  ],
+  "author": "Kami-Sqmf",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kami-sqmf/Kami-Bot/issues"
+  },
+  "homepage": "https://github.com/kami-sqmf/Kami-Bot#readme",
+  "dependencies": {
+    "@discordjs/voice": "^0.5.3",
+    "@google-cloud/firestore": "^4.13.1",
+    "discord.js": "^13.0.0-dev.02f55f0.1626742085",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "ffmpeg-static": "^4.4.0",
+    "libsodium-wrappers": "^0.7.9"
+  }
+}
