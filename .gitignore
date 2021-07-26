@@ -107,3 +107,5 @@ dist
 # TernJS port file
 .tern-port
 src/client/config/secret/kamibot-discord-firebase-adminsdk-gdtqs-ce8fc210b8.json
+*.mp3
+*.webm

@@ -6,5 +6,8 @@ const router = express.Router();
         
     });
 */
+router.use('/', function(req,res){
+        res.send("Sever Deployed!")
+});
 
 module.exports = router;

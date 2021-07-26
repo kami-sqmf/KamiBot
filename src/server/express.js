@@ -21,7 +21,7 @@ fs.readdirSync('./src/server/routes').forEach(dirs => {
 
 // Process
 app.listen(process.env.PORT || 3000)
-console.log("Express Module Logged！")
+console.log(`Express Module Logged on Port ${process.env.PORT || 3000}！`)
 
 // Exports
 module.exports = app

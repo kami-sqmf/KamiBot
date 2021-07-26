@@ -74,9 +74,30 @@ exports.admin = {
         rp_errorFormat: `${$g.uSuck} ` +  "請檢查指令\n **範例： `./language <set/default> ('lang-code')`",
         embed_supportedLang: "目前支援的語言",
         rp_errorDB: `${$g.cross} ` + "Kami 出錯了！ (請聯繫 Kami 官方管理員)",
+    },
+    clear: {
+        rp_errorFormat: `${$g.uSuck} ` + "請檢查指令\n **範例： `./clear <'numbers>`**",
+        rp_errorNumInput: `${$g.uSuck} ` + "請輸入正確的數字",
+        rp_errorWhileClearing: `${$g.cross} ` + "在刪除的過程中出了些問題 ( 請稍後在試 )",
+        rp_successClearing: `${$g.check} ` + "成功刪除 {{lines}} 條訊息！",
     }
 }
 
 exports.infos = {
     ping: `${$g.hourglass} ` + "目前的 Ping 為 **{{ping}}ms**"
+}
+
+exports.voice = {
+    play: {
+        rp_searching: "{{emoji}} 正在搜尋 {{request}}",
+        rp_errorProcess: + "Kami 出錯了！ (請聯繫 Kami 官方管理員)",
+        rp_errorFormat: `${$g.uSuck} ` + "請檢查指令\n **範例： `./play <'your link'>`**",
+    },
+    download: {
+        rp_searching: `{{emoji}} ` + "正在搜尋 {{request}}",
+        rp_downloading: `${$g.loading} ` + "請稍後，目前正在下載\n **{{file}}** 中",
+        rp_errorProcess: `${$g.cross} ` + "Kami 出錯了！ (請聯繫 Kami 官方管理員)",
+        rp_errorUploading: `${$g.cross} ` + "目前Kami無法成功上傳檔案到 Discord！ (請聯繫 Kami 官方管理員)",
+        rp_errorFormat: `${$g.uSuck} ` + "請檢查指令\n **範例： `./voice <type='mp3'|'mp4'> <'your link'>`**",
+    }
 }

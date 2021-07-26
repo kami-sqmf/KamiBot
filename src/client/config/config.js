@@ -3,9 +3,10 @@ require('dotenv').config()
 module.exports.emojis = {
     general: {
         check: `:ballot_box_with_check:`,
-        cross: `:redcross:`,
+        cross: `<:redcross:869202136402128946>`,
         uSuck: `:expressionless: `,
-        hourglass: `:hourglass:`
+        hourglass: `:hourglass:`,
+        loading: `<a:loading:869121472747147306>`,
     },
     troll: `<:Troll:844751964013199391>`,
     youtube: `<:Youtube:855754763287134218>`,
