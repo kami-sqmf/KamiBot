@@ -1,7 +1,4 @@
-const fs = require('fs');
-const axios = require('axios');
-const FormData = require('form-data');
-const playDetect = require("../../plugins/voice/playDetect")
+const playDetect = require("../../plugins/music/playDetect")
 module.exports = {
     name: 'download',
     shorten: ['yt2mp3', 'dd'],
@@ -33,60 +30,37 @@ module.exports = {
     },
 };
 
-function youtubeSend(message, info) {
-    const file = info.stream.pipe(fs.createWriteStream(`${message.author.id}.mp3`))
-    file.on('finish', async () => {
-        message.channel.send({
-            files: [{
-                attachment: `./${message.author.id}.mp3`,
-                name: `${ info.title }.mp3`,
-            }],
-        });
-        return file.destroy()
-    });
-    file.on('error', async () => {
-        message.channel.send(client.$e(text.rp_errorProcess));
-        return file.destroy()
+async function youtubeSend(message, info) {
+    const file = await stream2buffer(info.stream)
+    message.channel.send({
+        files: [{
+            attachment: file,
+            name: `${ info.title }.mp3`,
+        }],
     });
     return;
 }
 
 async function spotifySend(message, info) {
     const stream = await info.stream
-    let filename = new String()
-    stream.on('info', (_, format) => {
-            filename = `${message.author.id}.${format.container}`
-            stream.pipe(fs.createWriteStream(filename))
-        })
-        .on('end', () => {
-            message.channel.send({
-                files: [{
-                    attachment: `./${filename}`,
-                    name: `${ info.title }.webm`,
-                }],
-            });
-        })
-        .on('error', () => {
-            message.channel.send(client.$e(text.rp_errorProcess));
-            return stream.destroy()
-        })
+    stream.on('info', async(_, format)=>{
+        const file = await stream2buffer(stream)
+        message.channel.send({
+            files: [{
+                attachment: file,
+                name: `${info.title}.flac`,
+            }],
+        });
+        return;
+    })
     return;
 }
-// function uploadFile(url, path, name) { 
-//     const formData = new FormData();
-//     formData.append('files[]', fs.readFileSync(path), name);
-//     return axios.post(`${url}`, formData, {
-//         headers: formData.getHeaders(),
-//     })
-// }
 
-// function makeFileEmbed(title, url) {
-//     return {
-//         "title": title,
-//         "color": 6939554,
-//         "url": url,
-//         "video": {
-//             url: url
-//         }
-//     }
-// }
+function stream2buffer(stream) {
+    return new Promise((resolve, reject) => {
+        const _buf = [];
+        stream.on("data", (chunk) => _buf.push(chunk));
+        stream.on("end", () => resolve(Buffer.concat(_buf)));
+        stream.on("error", (err) => reject(err));
+    });
+} 

@@ -27,6 +27,7 @@
   "dependencies": {
     "@discordjs/voice": "^0.5.3",
     "@google-cloud/firestore": "^4.13.1",
+    "@google-cloud/text-to-speech": "^3.2.6",
     "axios": "^0.21.1",
     "discord.js": "^13.0.0-dev.4886ae2.1627300977",
     "dotenv": "^10.0.0",

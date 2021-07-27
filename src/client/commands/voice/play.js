@@ -1,6 +1,6 @@
-const playDetect = require("../../plugins/voice/playDetect")
+const playDetect = require("../../plugins/music/playDetect")
 module.exports = {
-    name: 'play',
+    name: 'plays',
     shorten: ['music'],
     restrictions: ['GUILD_TEXT'],
 
