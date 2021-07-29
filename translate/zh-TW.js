@@ -101,3 +101,13 @@ exports.voice = {
         rp_errorFormat: `${$g.uSuck} ` + "請檢查指令\n **範例： `./voice <type='mp3'|'mp4'> <'your link'>`**",
     }
 }
+
+exports.utils = {
+    calculate: {
+        activateAuthor: "KamiBot Discord 計算機",
+        expiredAuthor: "失效的 KamiBot 計算機",
+        calcHistory: "計算の歷史紀錄",
+        rp_calcResult: `${$g.check} ` + "根據超複雜的計算，答案是 {ans}",
+        rp_calcError: "這根本計算不出來啊！！！"
+    }
+}
