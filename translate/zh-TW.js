@@ -90,15 +90,22 @@ exports.infos = {
 exports.voice = {
     play: {
         rp_searching: "{{emoji}} 正在搜尋 {{request}}",
-        rp_errorProcess: + "Kami 出錯了！ (請聯繫 Kami 官方管理員)",
+        rp_errorProcess: `${$g.uSuck} ` + "Kami 出錯了！ (請聯繫 Kami 官方管理員)",
         rp_errorFormat: `${$g.uSuck} ` + "請檢查指令\n **範例： `./play <'your link'>`**",
     },
     download: {
         rp_searching: `{{emoji}} ` + "正在搜尋 {{request}}",
-        rp_downloading: `${$g.loading} ` + "請稍後，目前正在下載\n **{{file}}** 中",
+        rp_downloading: `${$g.loading} ` + "請稍後，目前正在下載\n **[{{file}}]({{url}})**",
         rp_errorProcess: `${$g.cross} ` + "Kami 出錯了！ (請聯繫 Kami 官方管理員)",
         rp_errorUploading: `${$g.cross} ` + "目前Kami無法成功上傳檔案到 Discord！ (請聯繫 Kami 官方管理員)",
-        rp_errorFormat: `${$g.uSuck} ` + "請檢查指令\n **範例： `./voice <type='mp3'|'mp4'> <'your link'>`**",
+        rp_errorFormat: `${$g.uSuck} ` + "請檢查指令\n **範例： `./download <'your link' || 'download name'>`**",
+        rp_errorTimeout: `${$g.cross} ` + "Kami 沒能在時間內完成下載！ (請稍後在試)",
+    },
+    tts: {
+        rp_errorTimeout: `${$g.cross} ` + "Kami 沒能在時間內完成下載！ (請稍後在試)",
+        rp_errorProcess: `${$g.cross} ` + "Kami 出錯了！ (請聯繫 Kami 官方管理員)",
+        rp_errorLangCode:  `${$g.uSuck} ` + "請檢查語言代碼\n**[點這裡查看代碼](http://www.lingoes.net/en/translator/langcode.htm)**",
+        rp_errorFormat: `${$g.uSuck} ` + "請檢查指令\n **範例： `./tts <'lang-code'> <'your word'>`**\n[Lang-Code 請點這裡](http://www.lingoes.net/en/translator/langcode.htm)",
     }
 }
 

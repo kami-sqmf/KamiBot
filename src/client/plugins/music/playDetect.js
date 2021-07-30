@@ -4,6 +4,7 @@ const youtubeToURL = require('./youtubeURI')
 const webFileToURL = require('./webfileURI')
 module.exports = async function (client, message, text) {
     let request = new String()
+    message.content = message.content.toLowerCase()
     if(message.content.includes("play") && !message.content.includes("playlist") ){
         request = message.content.slice(message.content.indexOf('play') + 5)
     }else if(message.content.includes("download")){
