@@ -4,7 +4,7 @@
   "description": "Kami Bot 是一個功能強大且多用途的 Discord 機器人，自 2021 年以來就一直努力不懈的在 Discord 伺服器上服務。他擁有許多功能，例如：撥放音樂、爬文、成員計算、警告...... +190，讓您工作更輕鬆。",
   "main": "./dist/app.js",
   "scripts": {
-    "build": "tsc",
+    "build-Type-Script": "tsc",
     "start": "node ./dist/app.js",
     "test": "nodemon"
   },
