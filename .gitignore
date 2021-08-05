@@ -109,3 +109,6 @@ dist
 src/client/config/secret/kamibot-discord-firebase-adminsdk-gdtqs-ce8fc210b8.json
 *.mp3
 *.webm
+nodemon.json
+.prettierrc
+tsconfig.json
