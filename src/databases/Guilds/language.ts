@@ -13,13 +13,13 @@ export async function update(client: client, guildId: string, newLang: string): 
                 merge: true,
             }
         )
-        const guildInfo = client.temp.guilds.get(guildId)
+        const guildInfo = client.getChache("guilds", guildId)
         if (!guildInfo) {
-            client.temp.guilds.set(guildId, {
+            client.setChache("guilds", guildId, {
                 language: newLang,
             })
         }
-        client.temp.guilds.set(guildId, {
+        client.setChache("guilds", guildId, {
             ...guildInfo,
             language: newLang,
         })
@@ -41,10 +41,10 @@ export async function restore(client: client, guildId: string): Promise<returnVa
         guildRef.update({
             language: deleteField,
         })
-        const guildInfo = client.temp.guilds.get(guildId)
+        const guildInfo = client.getChache("global", guildId)
         if (guildInfo) {
             delete guildInfo.language
-            client.temp.guilds.set(guildId, guildInfo)
+            client.setChache("global", guildId, guildInfo)
         }
     } catch (error) {
         return {

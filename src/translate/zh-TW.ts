@@ -68,44 +68,70 @@ export default {
             rp_sayLang: '目前伺服器使用的語言為 **{{lang}}**',
             rp_updatedLang: '成功設定新的語言 **({{lang}})**',
             rp_defaultLang1: '成功還原語言',
-            rp_defaultLang2: 'Now using Default Language - English', // Use English
+            rp_defaultLang2: '已還原至預設語言 - 中文', // Use Chinese
             rp_errorLangCode: '不好意思，我們現在還不支援這個語言',
             rp_errorFormat: "請檢查指令\n **範例： `./language <set/default> ('lang-code')`",
+            rp_errorNotGuild: '請在伺服器使用這個指令',
             embed_supportedLang: '目前支援的語言',
             rp_errorDB: 'Kami 出錯了！ (請聯繫 Kami 官方管理員)',
         },
         clear: {
-            rp_errorFormat: "請檢查指令\n **範例： `./clear <'numbers>`**",
-            rp_errorNumInput: '請輸入正確的數字',
+            rp_errorChannel: '請在文字頻道使用這個指令',
+            rp_errorNumInput: '請輸入正確的數字 (整數)',
             rp_errorWhileClearing: '在刪除的過程中出了些問題 ( 請稍後在試 )',
             rp_successClearing: '成功刪除 {{lines}} 條訊息！',
+            rp_startClearing: '正在刪除 {{lines}} 條訊息！',
         },
     },
 
     infos: {
-        ping: '{{emoji1}} 目前的 Ping 為 **{{ping}}ms**\n{{emoji2}} 訊息處理延遲為  **{{rewrite}}ms**',
+        ping: {
+            message: '{{emoji1}} 目前的 Ping 為 **{{ping}}ms**\n{{emoji2}} 訊息處理延遲為  **{{rewrite}}ms**',
+            footer: '由 {{user}} 測試'
+        },
     },
 
     voice: {
+        controls: {
+            embed_title: '音樂控制面板',
+            component_play: '播放',
+            component_pause: '暫停',
+            component_stop: '斷開',
+            component_skip: '下一首',
+        },
         play: {
             rp_searching: '正在搜尋 {{request}}',
             rp_errorProcess: 'Kami 出錯了！ (請聯繫 Kami 官方管理員)',
             rp_errorFormat: "請檢查指令\n **範例： `./play <'your link'>`**",
         },
         download: {
+            rp_added_queue: '[{{file}}]({{url}}) 已成功加入待播清單！',
             rp_searching: '正在搜尋 {{request}}',
-            rp_downloading: '請稍後，目前正在下載\n **[{{file}}]({{url}})**',
+            rp_downloading: '請稍後，目前正在下載\n **[{{file}}]({{url}})**\n{{time}}',
             rp_errorProcess: 'Kami 出錯了！ (請聯繫 Kami 官方管理員)',
             rp_errorUploading: '目前Kami無法成功上傳檔案到 Discord！ (請聯繫 Kami 官方管理員)',
             rp_errorFormat: "請檢查指令\n **範例： `./download <'your link' || 'download name'>`**",
             rp_errorTimeout: 'Kami 沒能在時間內完成下載！ (錯誤：檔案太大 或 稍後再試)',
         },
         tts: {
+            rp_added_queue: '{{content}} 已成功加入待播清單！',
             rp_errorTimeout: 'Kami 沒能在時間內完成下載！ (請稍後在試)',
             rp_errorProcess: 'Kami 出錯了！ (請聯繫 Kami 官方管理員)',
             rp_errorLangCode: '請檢查語言代碼\n**[點這裡查看代碼](http://www.lingoes.net/en/translator/langcode.htm)**',
             rp_errorFormat: "請檢查指令\n **範例： `./tts <'lang-code'> <'your word'>`**\n[Lang-Code 請點這裡](http://www.lingoes.net/en/translator/langcode.htm)",
         },
+        queue: {
+            rp_errorNotGuild: '請在伺服器使用這個指令！',
+            rp_queueEmpty: '目前沒有待播放的歌曲！',
+            embed_title: '目前的播放清單',
+            embed_description: '共有 {{count}} 首歌曲',
+            embed_fields: {
+                "added_by": "由 {{user}} 加入",
+                "moved_by": "，並由 {{user}} 移動順序",
+                "timestamp": "，加入時間：{{time}}",
+
+            }
+        }
     },
 
     utils: {

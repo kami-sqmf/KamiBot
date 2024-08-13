@@ -68,22 +68,27 @@ export default {
             rp_sayLang: 'Sever Language is **{{lang}}**',
             rp_updatedLang: 'Success update Language **({{lang}})**',
             rp_defaultLang1: 'Successful recover Language',
-            rp_defaultLang2: 'Now using Default Language - English', // Use English
+            rp_defaultLang2: '已還原至預設語言 - 中文', // Use Chinese
             rp_errorLangCode: "Sorry, we haven't support this language",
+            rp_errorNotGuild: 'Please use this command in a Guild',
             rp_errorFormat: "Please check your commands\n **Example： `./language <set/default> ('lang-code')`",
             embed_supportedLang: 'Current Support Language',
             rp_errorDB: 'KamiBot got an error (Please contact KamiBot Team)',
         },
         clear: {
-            rp_errorFormat: "Please check your commands\n **Example： `./clear <'numbers>`**",
-            rp_errorNumInput: 'Please enter a valid number',
+            rp_errorChannel: 'Please use this command in a text channel',
+            rp_errorNumInput: 'Please enter a valid number (Integer)',
             rp_errorWhileClearing: "There's an error during deleting message (Please try it later)",
             rp_successClearing: 'Successful delete {{lines}} message',
+            rp_startClearing: 'Deleting {{lines}} message',
         },
     },
 
     infos: {
-        ping: '{{emoji1}} The Ping is **{{ping}}ms** now\n{{emoji2}} Messages Edit Latency is **{{rewrite}}ms**',
+        ping: {
+            message: '{{emoji1}} The Ping is **{{ping}}ms** now\n{{emoji2}} Messages Edit Latency is **{{rewrite}}ms**',
+            footer: 'Tested by {{user}}'
+        },
     },
 
     voice: {
@@ -92,20 +97,41 @@ export default {
             rp_errorProcess: 'KamiBot got an error (Please contact KamiBot Team)',
             rp_errorFormat: "Please check your commands\n **Example： `./play <'your link'>`**",
         },
+        controls: {
+            embed_title: 'Music Control Panel',
+            component_play: 'Play',
+            component_pause: 'Pause',
+            component_stop: 'Stop',
+            component_skip: 'Skip',
+        },
         download: {
+            rp_added_queue: '[{{file}}]({{url}}) had been successfully added to the queue',
             rp_searching: 'Searching {{request}}',
-            rp_downloading: 'KamiBot is downloading\n **[{{file}}]({{url}})**',
+            rp_downloading: 'KamiBot is downloading\n **[{{file}}]({{url}})**\n{{time}}',
             rp_errorProcess: 'KamiBot got an error (Please contact KamiBot Team)',
             rp_errorUploading: "There's an error during uploading file to Discord！ (Please contact KamiBot Team)",
             rp_errorFormat: "Please check your commands\n **Example： `./download <'your link' || 'download name'>`**",
             rp_errorTimeout: "Kami didn't finish download in the specify time (Please try it later or The file to Large)",
         },
         tts: {
+            rp_added_queue: '{{content}} had been successfully added to the queue',
             rp_errorTimeout: "Kami didn't finish download in the specify time (Please try it later)",
             rp_errorProcess: 'KamiBot got an error (Please contact KamiBot Team)',
             rp_errorLangCode: 'Please check your language code\n**[Click Here](http://www.lingoes.net/en/translator/langcode.htm) to check all the language code**',
             rp_errorFormat: "Please check your commands\n **Example： `./tts <'lang-code'> <'your word'>`**\n[Lang-Code Here](http://www.lingoes.net/en/translator/langcode.htm)",
         },
+        queue: {
+            rp_errorNotGuild: 'Please use this command in a Guild',
+            rp_queueEmpty: 'The queue is empty',
+            embed_title: 'Current Queue',
+            embed_description: 'Total: {{count}} songs',
+            embed_fields: {
+                "added_by": "Added by {{user}}",
+                "moved_by": ", Moved by {{user}}",
+                "timestamp": ", Added Time: {{time}}",
+
+            }
+        }
     },
 
     utils: {

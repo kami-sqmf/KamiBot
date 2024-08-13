@@ -1,17 +1,12 @@
-import { MusicReturn } from "./music";
+import { MusicData, MusicReturn } from "./getMusicDatas";
 
-export default async function (req: string): Promise<MusicReturn> {
-    return {
-        success: true,
-        res: {
-            playlist: false,
-            video: [{
-                type: "URL",
-                title: `${req}`,
-                url: `${req}`,
-                thumbnail: `${req}`,
-                stream: `${req}`
-            }]
-        }
-    }
+export default async function (url: string): Promise<MusicReturn> {
+    const datas = new MusicData();
+    datas.addData({
+        title: `${url}`,
+        url: `${url}`,
+        thumbnail: `${url}`,
+        readable: undefined
+    });
+    return datas.getSuccessReturn();
 }

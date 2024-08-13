@@ -13,13 +13,13 @@ export async function update(client: client, guildId: string, newPrefix: string)
                 merge: true,
             }
         )
-        const guildInfo = client.temp.guilds.get(guildId)
+        const guildInfo = client.getChache("guilds", guildId)
         if (!guildInfo) {
-            client.temp.guilds.set(guildId, {
+            client.setChache("guilds", guildId, {
                 prefix: newPrefix,
             })
         }
-        client.temp.guilds.set(guildId, {
+        client.setChache("guilds", guildId, {
             ...guildInfo,
             prefix: newPrefix,
         })
@@ -41,10 +41,10 @@ export async function restore(client: client, guildId: string): Promise<returnVa
         guildRef.update({
             prefix: deleteField,
         })
-        const guildInfo = client.temp.guilds.get(guildId)
+        const guildInfo = client.getChache("guilds", guildId)
         if (guildInfo) {
             delete guildInfo.prefix
-            client.temp.guilds.set(guildId, guildInfo)
+            client.setChache("guilds", guildId, guildInfo)
         }
     } catch (error) {
         return {

@@ -1,7 +1,13 @@
-import { client } from './client/Clinet'
-import { Secret } from './client/interface/config'
-import secret from './client/Config/secert'
+import { client } from './client/Clinet';
+import secret from './client/Config/secert';
+import dbTemp from './databases/All/collector';
 
-const discord = new client()
-discord.setSecret(secret as Secret)
-discord.start()
+async function main() {
+  const prefetch = await dbTemp();
+  const discord = new client(secret, prefetch)
+  discord.start()
+  process.on('unhandledRejection', error => {
+    console.error('Unhandled promise rejection:', error);
+  });
+}
+main();

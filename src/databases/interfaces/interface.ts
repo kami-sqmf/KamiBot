@@ -4,8 +4,9 @@ export interface returnValue {
     data?: Map<string, any>
 }
 
-export interface tempValue {
-    global: Map<string, any> | undefined
-    guilds: Map<string, any> | undefined
-    users: Map<string, any> | undefined
+
+export type CacheType = 'global' | 'guilds' | 'users';
+
+export interface Cache {
+    [key: string]: Map<string, any>
 }

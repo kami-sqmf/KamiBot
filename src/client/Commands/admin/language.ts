@@ -1,95 +1,107 @@
-import { EmbedField, EmbedFieldData, Message, MessageEmbed, MessageEmbedOptions, NewsChannel, TextChannel, ThreadChannel } from 'discord.js'
+import { APIEmbedField, AutocompleteInteraction, ChatInputCommandInteraction, EmbedData, PermissionFlagsBits, SlashCommandBuilder } from 'discord.js'
+import { update } from '../../../databases/Guilds/language'
 import { client } from '../../Clinet'
-import { ExecutePrototype } from '../../interface/Commands'
 import emoji from '../../Config/emoji'
-import { update, restore } from '../../../databases/Guilds/language'
+import { AutoCompletePrototype, ExecutePrototype } from '../../interface/Commands'
 
-const name = 'language'
-const aliases = ['lang']
-const restrictions = ['GUILD_TEXT']
-const execute: ExecutePrototype = async function (client: client, message: Message, args: string[], language: string): Promise<any> {
-    const text = client.Translate.get(language).admin.language
-    const guildId = message.guild.id
-    const guildInfo = client.temp.guilds.get(guildId)
-    if (args.length == 0) {
-        return message.channel.send(
+const slash = new SlashCommandBuilder()
+    .setName('language')
+    .setDescription('機器人顯示語言 (per伺服器)')
+    .addSubcommand(subcommand =>
+        subcommand
+            .setName('current')
+            .setDescription('查看目前機器人在伺服器的顯示語言')
+    )
+    .addSubcommand(subcommand =>
+        subcommand
+            .setName('set')
+            .setDescription('設定目前機器人在伺服器的顯示語言')
+            .addStringOption(option => option.setName('language').setDescription('語言代碼').setRequired(true).setAutocomplete(true))
+    )
+    .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild)
+    .setDMPermission(false);
+
+const execute: ExecutePrototype = async function (client: client, interaction: ChatInputCommandInteraction, language: string): Promise<any> {
+    const text = client.Translate.get(language)!.admin.language;
+    const action = interaction.options.getSubcommand();
+    if (!interaction.guild) {
+        return interaction.reply({
+            ...client.$e(
+                client.$t(text.rp_errorNotGuild, {
+                    emoji: emoji.general.uSuck,
+                    lang: `${client.Translate.get(language)!.lang.language} ${language}`,
+                })
+            ), ephemeral: true
+        })
+    }
+    const guildId = interaction.guild.id;
+    if (action == 'current') {
+        return interaction.reply(
             client.$e(
                 client.$t(text.rp_sayLang, {
-                    lang: `${client.Translate.get(language).lang.language} ${language}`,
+                    lang: `${client.Translate.get(language)!.lang.language} ${language}`,
                 })
             )
         )
-    } else if (args.length == 1 && args[0] == 'default') {
-        const res = await restore(client, guildId)
-        if (res.error) {
-            return message.channel.send(
-                client.$e(
-                    client.$t(text.rp_errorDB, {
-                        emoji: emoji.general.cross,
-                    })
-                )
-            )
-        }
-        message.channel.send(
-            client.$e(
-                client.$t(text.rp_defaultLang1, {
-                    emoji: emoji.general.check,
-                })
-            )
-        )
-        return message.channel.send(client.$e(text.rp_defaultLang2))
-    } else if (args.length == 2 && args[0] == 'set') {
+    }
+    else if (action == 'set') {
+        const lang = interaction.options.getString('language')!;
         let langs = [...client.Translate.keys()]
-        if (!langs.includes(args[1])) {
-            message.channel.send(
+        if (!langs.includes(lang)) {
+            await interaction.reply(
                 client.$e(
                     client.$t(text.rp_errorLangCode, {
                         emoji: emoji.general.cross,
                     })
                 )
             )
-            return message.channel.send(client.$e('', makeSupportedLangEmbed(client, text, langs)))
+            return interaction.followUp(client.$e('', makeSupportedLangEmbed(client, text, langs)))
         }
-        const res = await update(client, guildId, args[1])
+        const res = await update(client, guildId, lang)
         if (res.error) {
-            return message.channel.send(
-                client.$e(
+            return interaction.reply({
+                ...client.$e(
                     client.$t(text.rp_errorDB, {
                         emoji: emoji.general.cross,
                     })
-                )
-            )
+                ), ephemeral: true
+            })
         }
-        return message.channel.send(
+        return interaction.reply(
             client.$e(
                 client.$t(text.rp_updatedLang, {
                     emoji: emoji.general.check,
-                    lang: `${client.Translate.get(args[1]).lang.language} ${args[1]}`,
+                    lang: `${client.Translate.get(lang)!.lang.language} ${lang}`,
                 })
             )
         )
     }
-    message.channel.send(client.$e('', makeSupportedLangEmbed(client, text, [...client.Translate.keys()])))
-    return message.channel.send(
-        client.$e(
-            client.$t(text.rp_errorFormat, {
-                emoji: emoji.general.uSuck,
-            })
-        )
-    )
 }
-function makeSupportedLangEmbed(client: client, text: any, langs: Array<string>): MessageEmbedOptions {
+function makeSupportedLangEmbed(client: client, text: any, langs: Array<string>): EmbedData {
     const format = {
         title: text.embed_supportedLang,
         color: 6939554,
-        fields: [] as Array<EmbedFieldData>,
+        fields: [] as APIEmbedField[],
     }
     langs.forEach((lang) => {
         format.fields.push({
-            name: `${client.Translate.get(lang).lang.language}`,
+            name: `${client.Translate.get(lang)!.lang.language}`,
             value: `${lang}`,
         })
     })
     return format
 }
-export { name, aliases, restrictions, execute }
+
+const autoComplete: AutoCompletePrototype = async function (client: client, interaction: AutocompleteInteraction): Promise<any> {
+    try {
+        const focusedValue = interaction.options.getFocused();
+        const choices = [...client.Translate.keys()];
+        const filtered = choices.filter(choice => choice.startsWith(focusedValue));
+        await interaction.respond(
+            filtered.map(choice => ({ name: client.Translate.get(choice)!.lang.language, value: choice })),
+        );
+    } catch (error) {
+        console.error(error);
+    }
+}
+export { autoComplete, execute, slash }
